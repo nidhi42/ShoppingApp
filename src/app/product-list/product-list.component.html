@@ -1,0 +1,80 @@
+<app-header></app-header>
+<ngb-carousel class="shoppee-slider padd-top-80" *ngIf="images">
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img src="../assets/images/slide1.jpg" alt="Random first slide">
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img src="../assets/images/slide2.jpg" alt="Random second slide">
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img src="../assets/images/slide3.jpg" alt="Random third slide">
+    </div>
+  </ng-template>
+</ngb-carousel>
+<ul class="app-menu" id="myDIV">
+  <li id="1"><a (click)="getProducts(1)">
+    <img src="../assets/images/boy.svg" alt="male">
+    <span>Men</span></a></li>
+  <li  id="2"><a (click)="getProducts(2)">
+  <img src="../assets/images/woman.svg" alt="female">
+
+  <span>Women</span>  
+</a></li>
+  <li id="3"><a (click)="getProducts(3)">
+  <img src="../assets/images/baby-boy.svg" alt="kids">
+  <span>Kids</span>
+</a></li>
+</ul>
+<div class="page-container">
+  <div class="app-title">
+    <h4>Shopee Products</h4>
+  </div>
+  <ul class="row clearfix product-ul">
+    <li class="col-sm-3" *ngFor="let product of productlist">
+      <mat-card class="example-card product-card clearfix">
+        <mat-card-header class="product-title">
+          <mat-card-title>{{product.name}}</mat-card-title>
+          <button class="btn btn-blue add-to-cart-btn pull-right" aria-label="Show an example snack-bar" (click)="addToCartClick(product.id)">Add TO Cart</button>
+        </mat-card-header>
+        <img mat-card-image [src]="product.photoPath" class="product-image" alt="Photo of a Shiba Inu">
+        <mat-card-content class="shopee-card-content clearfix">
+          <div class="clearfix">
+            <p class="product-description w-80 pull-left">
+              {{product.description}}
+            </p>
+            <p class="price w-20 pull-right text-right">
+              &#x20b9; {{product.price}}
+            </p>
+          </div>
+          <div class="clearfix">
+            <div class="w-100">
+              <div class="quantity-box text-right">
+                <div class="clearfix">
+                  <p class="incremented-price w-50 pull-right">&#x20b9;{{product.totalPrice}}</p>
+                  <div class="product-quantity">
+                    <button class="btn qty-decrement" (click)="decrementCartQty(product.id,product.quantity)">
+                      <i class="material-icons">
+                        remove
+                      </i>
+                    </button>
+                    <input type="number" min=1 max=50 class="qty-ctrl-input pull-left" [(ngModel)]="product.quantity">
+                    <button class="btn qty-increment" (click)="incrementCartQty(product.id,product.quantity)">
+                      <i class="material-icons">
+                        add
+                      </i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </li>
+  </ul>
+</div>
