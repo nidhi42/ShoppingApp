@@ -22,7 +22,9 @@ export class UserRegistrationComponent implements OnInit {
              lastName: ['', Validators.required],
              email: ['', [Validators.required, Validators.email]],
              password: ['', [Validators.required, Validators.minLength(6)]],
-             confirmPassword: ['', Validators.required]
+             confirmPassword: ['', Validators.required],
+             mobileNo: ['', [Validators.required,Validators.minLength(10)]],
+             address: ['', Validators.required]
         }, {
             validator: MustMatch('password', 'confirmPassword')
         });

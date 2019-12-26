@@ -22,12 +22,17 @@ export class CartComponent implements OnInit {
   searchText: string;
   noData = this.dataSource.connect().pipe(map(data => data.length === 0));
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  newUserDetails: any;
   constructor(public snackBar: MatSnackBar, private router: Router, private interService: IntermediateService) { }
     /** 
       *  Method to handle any additional initialization tasks. 
       */
+    
   ngOnInit() {
         let data = localStorage.getItem("cartSource");
+        let userdetails = localStorage.getItem("logindata");
+        this.newUserDetails = JSON.parse(userdetails);
+        console.log(this.newUserDetails);
         this.cartListDetails = JSON.parse(data);
         if(this.cartListDetails  !== null) {
            this.cartListDetails.forEach((item) => {
@@ -122,6 +127,9 @@ export class CartComponent implements OnInit {
     }
     let price = this.cartListDetails.find(x => x.id === id).price;
     this.cartListDetails.find(x => x.id === id).totalPrice = price * qty;
+  }
+  payNow() {
+    localStorage.clear();
   }
 }
 

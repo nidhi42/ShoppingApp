@@ -65,9 +65,11 @@ export class ProductListComponent implements OnInit {
         this.totalCartItem = this.totalCartItem + item.quantity;
       });
       this.interService.onNewCartList(this.totalCartItem);
+       let userDetails = localStorage.getItem("logindata");
       localStorage.clear();
       localStorage.setItem("productdata", JSON.stringify(this.productlist));
       localStorage.setItem("cartSource", JSON.stringify(this.cartListItems));
+      localStorage.setItem("logindata", userDetails);
   }
    /**
      * increment quantity by plus button using quantity box

@@ -24,6 +24,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {IntermediateService} from './product-list/intermediate.service';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import {IntermediateService} from './product-list/intermediate.service';
     ProductListComponent,
     CartComponent,
     HeaderComponent,
+    ThankyouComponent,
   ],
   imports: [
     BrowserModule,
