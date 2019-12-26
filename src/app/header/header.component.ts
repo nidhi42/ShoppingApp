@@ -25,10 +25,4 @@ export class HeaderComponent implements OnInit {
     openCartPage() {
       this.router.navigateByUrl('\cart');
     }
-   /**
-     * opens signup page by navigating this url
-     */
-    openSignup() {
-      this.router.navigateByUrl('');
-    }
 }

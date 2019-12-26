@@ -6,9 +6,6 @@
     </div>
     <div class="pull-right text-right w-80">
       <div class="pull-right mrt-10 line-height-big">
-        <a (click)="openSignup()" class="display-inline">
-         <img src="../assets/images/checkout.svg" class="display-inline checkout-img">
-        </a>
         <a class="ml-20 cart-button display-inline" *ngIf="totalCartItem !== undefined" (click)="openCartPage()">
           <span class="cart-item-count">{{totalCartItem}}</span>
           <img src="../assets/images/shopping-cart-full.svg" class="shopping-cart">
