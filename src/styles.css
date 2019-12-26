@@ -499,6 +499,20 @@ tr.mat-footer-row { font-weight: bold; }
   font-size: 30px;
   margin-top: 50px;
 }
+.logo-content {
+   text-align: center;
+   margin-top: 30px;
+}
+.logo-content h4 {
+  color: #fff;
+   font-style: italic !important;
+    font-size: 24px !important;
+    font-family: URW Chancery L, cursive !important;
+
+}
+.logo-content img {
+  max-height: 70px;
+}
 @media(max-width: 1440px) { .page-container {
     max-width: 960px;
   }

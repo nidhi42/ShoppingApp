@@ -1,6 +1,11 @@
 <!-- main app container -->
  <div class="banner-container">
- <div class="overlay"></div>
+ <div class="overlay">
+ <div class="logo-content">
+   <img src="../assets/images/logo.png" class="app-logo"  />
+   <h4>The Shopee</h4>
+ </div>
+ </div>
   <div class="registration-form">
                   <h3 class="page-title">Registration</h3>
                   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
