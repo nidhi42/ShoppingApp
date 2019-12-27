@@ -1,21 +1,20 @@
 <mat-toolbar class="app-header">
   <div class="page-container no-padding clearfix">
-    <div class="pull-left w-20" (click)="openSignup()">
-      <img src="../assets/images/logo.png" class="app-logo"  />
-      <h4 class="logo-text">The Shopee</h4>
+    <div class="pull-left w-20">
+
+      <a class="main-logo" (click)="gotoProductList()">
+        <img src="../assets/images/logo.png" class="app-logo" />
+        <h4 class="logo-text">The Shopee</h4>
+      </a>
     </div>
     <div class="pull-right text-right w-80">
       <div class="pull-right mrt-10 line-height-big">
-        <a class="ml-20 cart-button display-inline" *ngIf="totalCartItem !== undefined" (click)="openCartPage()">
-          <span class="cart-item-count">{{totalCartItem}}</span>
-          <img src="../assets/images/shopping-cart-full.svg" class="shopping-cart">
-        </a>
-        <a class="ml-20 cart-button display-inline" *ngIf="totalCartItem == undefined" (click)="openCartPage()">
-         
+        <a class="display-inline" routerLink="/product-list"></a>
+        <a class="ml-20 cart-button display-inline"  (click)="openCartPage()">
+          <span class="cart-item-count" *ngIf="totalCartItem !== undefined">{{totalCartItem}}</span>
           <img src="../assets/images/shopping-cart-empty.svg" class="shopping-cart">
         </a>
       </div>
-  
     </div>
   </div>
 </mat-toolbar>

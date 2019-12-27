@@ -1,111 +1,106 @@
 <app-header></app-header>
 <div class="page-container padd-top-120">
-      <div class="app-title">
-        <h4>Shopee Cart</h4>
-      </div>
-      <div class="clearfix cart-table-top">
-          <div class="w-70 pull-left">
-          <mat-form-field class="pull-left w-50">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-          </mat-form-field>
-           <button mat-button class="btn pull-right btn-theme btn-rounded ml-10" color="primary" *ngIf="selection.hasValue() && isAllSelected() || selection.hasValue() && !isAllSelected()" (click)="removeSelectedRows()">
-              <i class="material-icons">delete</i> Remove Item
-            </button>
-            </div>
-          <div class="w-30 pull-right">
-            <button mat-button class="btn pull-right btn-theme" (click)="continueShopping()"><i class="material-icons">keyboard_arrow_left</i> Continue Shopping</button>
-          </div>
-        </div>
-      <div class="pull-left w-70">
-      
-        <div class="main-table">
-          <div class="table-container mat-elevation-z8" >
-            <table mat-table [dataSource]="dataSource" *ngIf="dataSource.filteredData.length !== 0 || dataSource.data.length  !== 0" class="w-100 cart-table">
-              <!-- Checkbox Column -->
-              <ng-container matColumnDef="select">
-                <th mat-header-cell *matHeaderCellDef class="w-5">
-                  <mat-checkbox (change)="$event ? masterToggle() : null"
-                                [checked]="selection.hasValue() && isAllSelected()"
-                                [indeterminate]="selection.hasValue() && !isAllSelected()">
-                  </mat-checkbox>
-                </th>
-                <td mat-cell *matCellDef="let row" class="w-5">
-                  <mat-checkbox (click)="$event.stopPropagation()"
-                                (change)="$event ? selection.toggle(row) : null"
-                                [checked]="selection.isSelected(row)">
-                  </mat-checkbox>
-                </td>
-                <td mat-footer-cell *matFooterCellDef class="w-5"> </td>
-              </ng-container>
-              <ng-container matColumnDef="photopath">
-                <th mat-header-cell *matHeaderCellDef class="w-10 text-center"> Image </th>
-                <td mat-cell *matCellDef="let element" class="product-list-img w-10">
-                  <img [src]="element.photoPath" />
-                </td>
-                <td mat-footer-cell *matFooterCellDef class="w-10"> </td>
-              </ng-container>
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef class="w-50"> Details </th>
-                <td mat-cell *matCellDef="let element" class="w-50">
-                  <div class="product-details-col" [innerHTML]="element.name"></div>
-                </td>
-                <td mat-footer-cell *matFooterCellDef class="w-50"></td>
-              </ng-container>
-              <ng-container matColumnDef="price">
-                <th mat-header-cell *matHeaderCellDef class="w-10"> Price </th>
-                <td mat-cell *matCellDef="let element" class="w-10"> {{element.price}} </td>
-                <td mat-footer-cell *matFooterCellDef class="w-10"> </td>
-              </ng-container>
-              <ng-container matColumnDef="quantity">
-                <th mat-header-cell *matHeaderCellDef class="w-10"> Quantity </th>
-                <td mat-cell *matCellDef="let element" class="w-10">
-                  <div class="product-quantity">
-                    <button class="btn qty-decrement" (click)="decrementCartQty(element.id,element.quantity)">
-                      <i class="material-icons">
-                        remove
-                      </i>
-                    </button>
-                    <input type="number" min=1 max=50 class="qty-ctrl-input pull-left" [(ngModel)]="element.quantity">
-                    <button class="btn qty-increment" (click)="incrementCartQty(element.id,element.quantity)">
-                      <i class="material-icons">
-                        add
-                      </i>
-                    </button>
-                  </div>
-                </td>
-                <td mat-footer-cell *matFooterCellDef>Grand Total</td>
-              </ng-container>
-              <ng-container matColumnDef="totalPrice">
-                <th mat-header-cell *matHeaderCellDef class="w-15">Total Price</th>
-                <td mat-cell *matCellDef="let element" class="w-15"> {{element.totalPrice}} </td>
-                <td mat-footer-cell *matFooterCellDef class="w-15">{{getTotalCost()}} </td>
-              </ng-container>
+  <div class="app-title">
+    <h4>Shopee Cart</h4>
+  </div>
+  <div class="clearfix cart-table-top">
+    <div class="w-70 pull-left">
+      <mat-form-field class="pull-left w-50">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    <div class="w-30 pull-right">
+      <button mat-button class="btn pull-right btn-theme" (click)="continueShopping()"><i class="material-icons">keyboard_arrow_left</i> Continue Shopping</button>
+    </div>
+  </div>
+  <div class="pull-left w-70">
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns  sticky: true "></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              <tr  class="grand-total-price" mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr> 
-            </table>
-          </div>
-          <div *ngIf="dataSource.filteredData.length == 0 || dataSource.data.length == 0" class="no-records">
-            No records found
-          </div>
-       </div>
-   </div>
-     <div class="pull-left w-27 ml-40">
-      <mat-card class="user-section">
-        <mat-card-header class="user-section-header">
-          <mat-card-title>User Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="user-section-details">
-          <ul class="details-ul">
-             <li class="details-li"><b class="display-inline">Name</b>: <p>{{newUserDetails.firstName}} {{newUserDetails.lastName}}</p></li>
-             <li class="details-li"><b class="display-inline">Phone Number</b>: <p>{{newUserDetails.mobileNo}}</p></li>
-             <li class="details-li"><b class="display-inline">Email Id</b>: <p>{{newUserDetails.email}}</p></li>
-             <li class="details-li"><b class="display-inline">Address</b>: <p>{{newUserDetails.address}}</p></li>
-          </ul>
-        </mat-card-content>
-      </mat-card>
-       <button mat-button class="btn w-100 btn-theme btn-paynow" routerLink="/thank-you" (click)="payNow()"><i class="material-icons">account_balance_wallet
-</i> Pay Now</button>
+    <div class="main-table">
+      <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" *ngIf="dataSource.filteredData.length !== 0 || dataSource.data.length  !== 0" class="w-100 cart-table">
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef class="w-5">
+              <!--<mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>-->
+            </th>
+            <td mat-cell *matCellDef="let row" class="w-5">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </td>
+            <td mat-footer-cell *matFooterCellDef class="w-5"> </td>
+          </ng-container>
+          <ng-container matColumnDef="photopath">
+            <th mat-header-cell *matHeaderCellDef class="w-10 text-center"> Image </th>
+            <td mat-cell *matCellDef="let element" class="product-list-img w-10">
+              <img [src]="element.photoPath" />
+            </td>
+            <td mat-footer-cell *matFooterCellDef class="w-10"> </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="w-40"> Details </th>
+            <td mat-cell *matCellDef="let element" class="w-40">
+              <div class="product-details-col" [innerHTML]="element.name"></div>
+            </td>
+            <td mat-footer-cell *matFooterCellDef class="w-40"></td>
+          </ng-container>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef class="w-10"> Price </th>
+            <td mat-cell *matCellDef="let element" class="w-10"> {{element.price}} </td>
+            <td mat-footer-cell *matFooterCellDef class="w-10"> </td>
+          </ng-container>
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef class="w-10"> Quantity </th>
+            <td mat-cell *matCellDef="let element" class="w-10">
+              {{element.quantity}}
+            </td>
+            <td mat-footer-cell *matFooterCellDef>Grand Total</td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="w-10"> action </th>
+            <td mat-cell *matCellDef="let element" class="w-10">
+              <a class="delete-button" (click)="removeSelectedRows()"><i class="material-icons">delete</i></a>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="totalPrice">
+            <th mat-header-cell *matHeaderCellDef class="w-15">Total Price</th>
+            <td mat-cell *matCellDef="let element" class="w-15"> {{element.totalPrice}} </td>
+            <td mat-footer-cell *matFooterCellDef class="w-15">{{getTotalCost()}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns  sticky: true "></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr class="grand-total-price" mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+        </table>
       </div>
+      <div *ngIf="dataSource.filteredData.length == 0 || dataSource.data.length == 0" class="no-records">
+        No records found
+      </div>
+    </div>
+  </div>
+  <div class="pull-left w-27 ml-40">
+    <mat-card class="user-section">
+      <mat-card-header class="user-section-header">
+        <mat-card-title>User Details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="user-section-details">
+        <ul class="details-ul">
+          <li class="details-li"><b class="display-inline">Name</b>: <p>{{newUserDetails.firstName}} {{newUserDetails.lastName}}</p></li>
+          <li class="details-li"><b class="display-inline">Phone Number</b>: <p>{{newUserDetails.mobileNo}}</p></li>
+          <li class="details-li"><b class="display-inline">Email Id</b>: <p>{{newUserDetails.email}}</p></li>
+          <li class="details-li"><b class="display-inline">Address</b>: <p>{{newUserDetails.address}}</p></li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+    <button mat-button class="btn w-100 btn-theme btn-paynow" routerLink="/thank-you" (click)="payNow()">
+      <i class="material-icons">
+        account_balance_wallet
+      </i> Pay Now
+    </button>
+  </div>
 </div>

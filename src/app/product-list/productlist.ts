@@ -11,7 +11,9 @@ export interface Productlist {
 }
 
 export enum productCategory {
+  all = 0,
   men = 1,
   women = 2,
-  kids = 3
+  kids = 3,
+  
 }

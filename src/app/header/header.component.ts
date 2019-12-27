@@ -24,5 +24,11 @@ export class HeaderComponent implements OnInit {
      */ 
     openCartPage() {
       this.router.navigateByUrl('\cart');
-    }
+  }
+     /**
+       * opens product-list page by navigating this url
+       */
+  gotoProductList() {
+    this.router.navigateByUrl('\product-list');
+  }
 }

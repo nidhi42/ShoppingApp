@@ -17,18 +17,31 @@
   </ng-template>
 </ngb-carousel>
 <ul class="app-menu" id="myDIV">
-  <li id="1"><a (click)="getProducts(1)">
-    <img src="../assets/images/boy.svg" alt="male">
-    <span>Men</span></a></li>
-  <li  id="2"><a (click)="getProducts(2)">
-  <img src="../assets/images/woman.svg" alt="female">
+  <li id="0" class="activated">
+    <a (click)="getProducts(0)">
+      <img src="../assets/images/AllProducts.svg" alt="All" />
+      <span> All</span>
+    </a>
+  </li>
+  <li id="1">
+    <a (click)="getProducts(1)">
+      <img src="../assets/images/boy.svg" alt="male">
+      <span>Men</span>
+    </a>
+  </li>
+  <li id="2">
+    <a (click)="getProducts(2)">
+      <img src="../assets/images/woman.svg" alt="female">
+      <span>Women</span>
+    </a>
+  </li>
+  <li id="3">
+    <a (click)="getProducts(3)">
+      <img src="../assets/images/baby-boy.svg" alt="kids">
+      <span>Kids</span>
+    </a>
+  </li>
 
-  <span>Women</span>  
-</a></li>
-  <li id="3"><a (click)="getProducts(3)">
-  <img src="../assets/images/baby-boy.svg" alt="kids">
-  <span>Kids</span>
-</a></li>
 </ul>
 <div class="page-container">
   <div class="app-title">

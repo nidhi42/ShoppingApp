@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Productlist, productCategory } from './productlist';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IntermediateService } from './intermediate.service';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-product-list',
@@ -11,7 +12,7 @@ import { IntermediateService } from './intermediate.service';
 export class ProductListComponent implements OnInit {
   [x: string]: any;
   durationInSeconds = 5;
-  constructor(public snackBar: MatSnackBar, private interService: IntermediateService) { }
+  constructor(public snackBar: MatSnackBar, private interService: IntermediateService, private commonService: CommonService) { }
   categoryType = productCategory;
   cartListItems: Productlist[] = [];
   itemData: Productlist;
@@ -41,7 +42,10 @@ export class ProductListComponent implements OnInit {
     this.productlist.forEach(item => {
       item.totalPrice = item.price * item.quantity;
     });
-    localStorage.setItem("productdata", JSON.stringify(this.productlist));
+    this.commonService.onSetData("productdata", this.productlist);
+   
+   // localStorage.setItem("productdata", JSON.stringify(this.productlist));
+
     let data = localStorage.getItem("productdata");
     this.productlist = JSON.parse(data);
   }
@@ -65,11 +69,12 @@ export class ProductListComponent implements OnInit {
         this.totalCartItem = this.totalCartItem + item.quantity;
       });
       this.interService.onNewCartList(this.totalCartItem);
-       let userDetails = localStorage.getItem("logindata");
+      debugger
+      let userDetails = localStorage.getItem("logindata");
       localStorage.clear();
-      localStorage.setItem("productdata", JSON.stringify(this.productlist));
-      localStorage.setItem("cartSource", JSON.stringify(this.cartListItems));
-      localStorage.setItem("logindata", userDetails);
+      this.commonService.onSetData("productdata", this.productlist);
+      this.commonService.onSetData("cartSource", this.cartListItems);
+      this.commonService.onSetData("logindata", userDetails);
   }
    /**
      * increment quantity by plus button using quantity box
@@ -104,12 +109,16 @@ export class ProductListComponent implements OnInit {
    let data = localStorage.getItem("productdata");
     this.productlist = JSON.parse(data);
     let productData = [];
-    this.productlist.forEach((item) => {
-      if (item.category == category) {
-        productData.push(item);
-      
-      }
-    });
+    if (category === 0) {
+      this.productlist;
+    } else {
+      this.productlist.forEach((item) => {
+        if (item.category == category) {
+          productData.push(item);
+        }
+      });
+    }
+  
     if (productData.length != 0) {
       this.productlist = productData;
     }
