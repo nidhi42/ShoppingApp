@@ -21,13 +21,13 @@ export class CommonService {
   }
   onSetData(type, commonData: any) {
     if (type === "productdata") {
-     localStorage.setItem("productdata", JSON.stringify(commonData));
+      localStorage.setItem("productdata", JSON.stringify(commonData));
     }
     if (type === "cartSource") {
       localStorage.setItem("cartSource", JSON.stringify(commonData));
     }
     if (type === "logindata") {
-      localStorage.setItem("logindata",commonData);
+      localStorage.setItem("logindata", commonData);
     }
   }
 }

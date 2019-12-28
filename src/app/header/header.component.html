@@ -9,10 +9,12 @@
     </div>
     <div class="pull-right text-right w-80">
       <div class="pull-right mrt-10 line-height-big">
-        <a class="display-inline" routerLink="/product-list"></a>
-        <a class="ml-20 cart-button display-inline"  (click)="openCartPage()">
+        <a class="cart-button display-inline" (click)="openCartPage()">
           <span class="cart-item-count" *ngIf="totalCartItem !== undefined">{{totalCartItem}}</span>
           <img src="../assets/images/shopping-cart-empty.svg" class="shopping-cart">
+        </a>
+        <a class="ml-40 display-inline logout-button" (click)="clearAll()" routerLink="/user-registration">
+          <img src="../assets/images/logout-white.svg" alt="logout" />
         </a>
       </div>
     </div>

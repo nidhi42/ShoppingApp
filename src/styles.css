@@ -63,10 +63,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-align: center;
 }
 .ml-10 {
- margin-left: 10px !important;
+  margin-left: 10px !important;
 }
 .ml-40 {
- margin-left: 40px;  
+  margin-left: 40px;  
 }
 .padd-top-80 {
   padding-top: 80px !important;
@@ -108,12 +108,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: rgba(255, 255, 255, 0.8);
     padding: 30px 40px;
 }
-.page-title {
-  font-size: 18px;
-  border-bottom: 3px solid #7fcc2a;
-  padding-bottom: 5px;
-  margin-bottom: 30px;
-}
+.page-title { font-size: 30px; border-bottom: 3px solid #7fcc2a; padding-bottom: 5px; margin-bottom: 30px; color: #7fcc2a; font-family: URW Chancery L, cursive !important; margin-bottom: 5px; font-style: italic; }
 .full-width {
  width: 100%;
 }
@@ -135,8 +130,8 @@ margin-top: -15px;
 }
 .shoppee-slider .picsum-img-wrapper img {
   width: 100%;
+  object-fit: cover;
   height: 100%;
-  object-fit: fill;
 }
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
@@ -453,6 +448,7 @@ tr.mat-footer-row { font-weight: bold; }
 .user-section {
   padding: 0 !important;
   margin-bottom: 20px;
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12) !important;
 }
 .user-section  .user-section-header {
   padding: 10px;
@@ -515,6 +511,23 @@ tr.mat-footer-row { font-weight: bold; }
 }
 .logo-content img {
   max-height: 70px;
+}
+.logout-button img {
+  max-height: 34px;
+}
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: #000;
+}
+.mat-form-field.mat-focused .mat-form-field-label { color:#7fcc2a; }
+.mat-form-field-appearance-legacy.mat-focused .mat-form-field-underline { background-color: #7fcc2a; }
+.mat-form-field.mat-focused .mat-form-field-ripple { background-color: #7fcc2a; }
+.product-details-col {
+  line-height: 16px !important;
+}
+.delete-button  i {
+  cursor: pointer;
+  color: red;
+  opacity: 0.6;
 }
 @media(max-width: 1440px) { .page-container {
     max-width: 960px;

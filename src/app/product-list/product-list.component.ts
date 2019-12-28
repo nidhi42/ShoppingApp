@@ -18,17 +18,18 @@ export class ProductListComponent implements OnInit {
   itemData: Productlist;
   totalCartItem: number = 0;
   message: string = 'Product Added To Cart !!';
-    /** 
-      *  Slider Images. 
-      */
+  action: string;
+  /**
+    *  Slider Images. 
+    */
   images = [1, 2, 3].map((n) => `https://picsum.photos/id/${n}/900/500`);
    /** 
      *  Product List Data. 
      */
   productlist: Productlist[] = [
-    { id: 11, name: "U.S. Polo Assn. Womens Solid Polo T-Shirt", description: "Regular Fit,Round Neck,100% Cotton", quantity: 1, price: 3000, category: this.categoryType.women, photoPath: "../assets/images/product1.jpg", totalPrice: 0 },
+    { id: 11, name: "U.S. Polo Assn. Womens Solid Polo T-Shirt", description: "Regular Fit", quantity: 1, price: 3000, category: this.categoryType.women, photoPath: "../assets/images/product1.jpg", totalPrice: 0 },
 
-    { id: 12, name: "Bloomun Full Sleeve Grey Compression/Inner Tops", description: "Sleeveless,Regular Fit,Round Neck,100% Cotton", quantity: 1, price: 400, category: this.categoryType.women, photoPath: "../assets/images/product2.jpg", totalPrice: 0 },
+    { id: 12, name: "Bloomun Full Sleeve Grey Compression/Inner Tops", description: "Sleeveless,Round Neck,100% Cotton", quantity: 1, price: 400, category: this.categoryType.women, photoPath: "../assets/images/product2.jpg", totalPrice: 0 },
 
     { id: 13, name: "Pearl Beading Tiered Cuff Ribbed Cape Coat,L", description: "Sleeveless,Regular Fit,Round Neck,100% Cotton", quantity: 1, price: 1500, category: this.categoryType.men, photoPath: "../assets/images/product3.jpg", totalPrice: 0 },
 
@@ -48,6 +49,7 @@ export class ProductListComponent implements OnInit {
 
     let data = localStorage.getItem("productdata");
     this.productlist = JSON.parse(data);
+  
   }
    /**
      * add products in cart 
@@ -63,18 +65,22 @@ export class ProductListComponent implements OnInit {
       }
       this.itemData = this.productlist.find(x => x.id === id);
       this.cartListItems.push(this.itemData);
-      this.snackBar.open(this.message);
+      this.snackBar.open(this.message,this.action, {
+          duration: 2000
+      });
       this.totalCartItem = 0;
       this.cartListItems.forEach(item => {
         this.totalCartItem = this.totalCartItem + item.quantity;
       });
       this.interService.onNewCartList(this.totalCartItem);
-      debugger
+      //debugger
       let userDetails = localStorage.getItem("logindata");
       localStorage.clear();
-      this.commonService.onSetData("productdata", this.productlist);
+    this.commonService.onSetData("productdata", this.productlist);
+    debugger
       this.commonService.onSetData("cartSource", this.cartListItems);
       this.commonService.onSetData("logindata", userDetails);
+
   }
    /**
      * increment quantity by plus button using quantity box

@@ -39,8 +39,8 @@ export class UserRegistrationComponent implements OnInit {
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
-        }
-      this.commonService.onSetData("logindata", this.registerForm.value);
+      }
+      this.commonService.onSetData("logindata", JSON.stringify(this.registerForm.value));
       this.router.navigateByUrl('\product-list');
     }
 
