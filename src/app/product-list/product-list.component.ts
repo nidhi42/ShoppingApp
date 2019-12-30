@@ -76,8 +76,7 @@ export class ProductListComponent implements OnInit {
       //debugger
       let userDetails = localStorage.getItem("logindata");
       localStorage.clear();
-    this.commonService.onSetData("productdata", this.productlist);
-    debugger
+      this.commonService.onSetData("productdata", this.productlist);
       this.commonService.onSetData("cartSource", this.cartListItems);
       this.commonService.onSetData("logindata", userDetails);
 

@@ -40,7 +40,6 @@ export class CartComponent implements OnInit {
     this.newUserDetails = JSON.parse(userdetails);
     console.log(this.newUserDetails);
     this.cartListDetails = JSON.parse(data);
-    debugger
     //this.originalCardDetails = Object.assign([], this.cartListDetails);
     //if (this.originalCardDetails !== null) {
     //this.originalCardDetails.forEach((item) => {
@@ -99,7 +98,6 @@ export class CartComponent implements OnInit {
       localStorage.clear();
       this.commonService.onSetData("productdata", productlist);
       this.commonService.onSetData("logindata", userdetails);
-      debugger
       this.commonService.onSetData("cartSource", this.cartListDetails);
       selected = true;
     });
