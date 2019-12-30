@@ -110,8 +110,9 @@ export class CartComponent implements OnInit {
         this.totalCartItem = this.totalCartItem + item.quantity;
       });
       this.interService.onNewCartList(this.totalCartItem);
+      this.snackBar.open(this.message);
     }
-    this.snackBar.open(this.message);
+  
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */

@@ -488,14 +488,16 @@ tr.mat-footer-row { font-weight: bold; }
    justify-content: center;
    align-items: center;
    flex-direction:column;
-   margin-top: 100px;
-}
+   height: 100%;
+   font-family: URW Chancery L, cursive !important;
+   font-style: italic;
+ }
 .thankyou-content img {
   max-height: 400px;
 }
 .thankyou-content p {
   color: #7fcc2a;
-  font-size: 30px;
+  font-size: 50px;
   margin-top: 50px;
 }
 .logo-content {
@@ -523,6 +525,11 @@ tr.mat-footer-row { font-weight: bold; }
 .mat-form-field.mat-focused .mat-form-field-ripple { background-color: #7fcc2a; }
 .product-details-col {
   line-height: 16px !important;
+  display: inline-block;
+  vertical-align: top;
+}
+.mat-column-name .product-details-col {
+  font-weight: bold;
 }
 .delete-button  i {
   cursor: pointer;

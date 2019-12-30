@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+// in app.component.ts
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'the-shopee';
+   constructor() {
+    // check if back or forward button is pressed.
+   
+  }
 }
