@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   grandTotal: number = 0;
   selection = new SelectionModel<Productlist>(true, []);
   dataSource = new MatTableDataSource<Productlist>(this.cartListDetails);
-  displayedColumns: string[] = ['select', 'photopath', 'name', 'description', 'price', 'quantity', 'totalPrice', 'action'];
+  displayedColumns: string[] = ['photopath', 'name', 'description', 'price', 'quantity', 'totalPrice', 'action'];
   searchText: string;
   noData = this.dataSource.connect().pipe(map(data => data.length === 0));
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -45,10 +45,14 @@ export class CartComponent implements OnInit {
     //this.originalCardDetails.forEach((item) => {
     //  item.name = "<p class='bold'>" + item.name + "</p><p>" + item.description + "</p>";
     //});
-    this.dataSource = new MatTableDataSource(this.cartListDetails);
-    this.cartListDetails.forEach((item) => {
-      this.grandTotal = this.grandTotal + item.totalPrice;
-    });
+
+    debugger
+    if (this.cartListDetails !== null) {
+      this.dataSource = new MatTableDataSource(this.cartListDetails);
+      this.cartListDetails.forEach((item) => {
+        this.grandTotal = this.grandTotal + item.totalPrice;
+      });
+    }
   }
 
 
@@ -85,8 +89,8 @@ export class CartComponent implements OnInit {
     *  Remove selected products in table 
     */
   removeSelectedRows() {
-    let selected = false;
-    this.selection.selected.forEach(item => {
+
+    this.cartListDetails.forEach(item => {
       let index: number = this.cartListDetails.findIndex(d => d === item);
       console.log(this.cartListDetails.findIndex(d => d === item));
       this.cartListDetails.splice(index, 1);
@@ -99,18 +103,15 @@ export class CartComponent implements OnInit {
       this.commonService.onSetData("productdata", productlist);
       this.commonService.onSetData("logindata", userdetails);
       this.commonService.onSetData("cartSource", this.cartListDetails);
-      selected = true;
-    });
 
-    if (selected) {
-      this.totalCartItem = 0;
-      this.cartListDetails.forEach(item => {
-        this.totalCartItem = this.totalCartItem + item.quantity;
-      });
-      this.interService.onNewCartList(this.totalCartItem);
-      this.snackBar.open(this.message);
-    }
-  
+    });
+    this.totalCartItem = 0;
+    this.cartListDetails.forEach(item => {
+      this.totalCartItem = this.totalCartItem + item.quantity;
+    });
+    
+    this.interService.onNewCartList(this.totalCartItem);
+    this.snackBar.open(this.message);
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -133,7 +134,8 @@ export class CartComponent implements OnInit {
   }
 
   payNow() {
-    localStorage.clear();
+    //localStorage.clear();
+    this.router.navigateByUrl("/thank-you");
   }
 }
 

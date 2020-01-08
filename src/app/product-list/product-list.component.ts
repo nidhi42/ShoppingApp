@@ -44,8 +44,7 @@ export class ProductListComponent implements OnInit {
       item.totalPrice = item.price * item.quantity;
     });
     this.commonService.onSetData("productdata", this.productlist);
-   
-   // localStorage.setItem("productdata", JSON.stringify(this.productlist));
+    // localStorage.setItem("productdata", JSON.stringify(this.productlist));
 
     let data = localStorage.getItem("productdata");
     this.productlist = JSON.parse(data);

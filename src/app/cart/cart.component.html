@@ -19,21 +19,7 @@
       <div class="table-container mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" *ngIf="dataSource.filteredData.length !== 0 || dataSource.data.length  !== 0" class="w-100 cart-table">
           <!-- Checkbox Column -->
-          <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef class="w-5">
-              <!--<mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()">
-      </mat-checkbox>-->
-            </th>
-            <td mat-cell *matCellDef="let row" class="w-5">
-              <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null"
-                            [checked]="selection.isSelected(row)">
-              </mat-checkbox>
-            </td>
-            <td mat-footer-cell *matFooterCellDef class="w-5"> </td>
-          </ng-container>
+
           <ng-container matColumnDef="photopath">
             <th mat-header-cell *matHeaderCellDef class="w-10 text-center"> Image </th>
             <td mat-cell *matCellDef="let element" class="product-list-img w-10">
@@ -104,7 +90,7 @@
         </ul>
       </mat-card-content>
     </mat-card>
-    <button mat-button class="btn w-100 btn-theme btn-paynow" routerLink="/thank-you" (click)="payNow()">
+    <button mat-button class="btn w-100 btn-theme btn-paynow"  (click)="payNow()">
       <i class="material-icons">
         account_balance_wallet
       </i> Pay Now

@@ -5,18 +5,17 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 })
 
 export class CommonService {
-  //@Output() getData: EventEmitter<number> = new EventEmitter<number>();
   constructor() {
   }
   onGetData(type) {
     if (type === "productdata") {
-      let prdouctData = localStorage.getItem("productdata");
+      return localStorage.getItem("productdata");
     }
     if (type === "cartSource") {
-      let cartData = localStorage.getItem("cartSource");
+      return localStorage.getItem("cartSource");
     }
     if (type === "logindata") {
-      let loginData = localStorage.getItem("logindata");
+      return localStorage.getItem("logindata");
     }
   }
   onSetData(type, commonData: any) {

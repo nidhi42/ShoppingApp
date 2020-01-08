@@ -108,15 +108,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: rgba(255, 255, 255, 0.8);
     padding: 30px 40px;
 }
-.page-title { font-size: 30px; border-bottom: 3px solid #7fcc2a; padding-bottom: 5px; margin-bottom: 30px; color: #7fcc2a; font-family: URW Chancery L, cursive !important; margin-bottom: 5px; font-style: italic; }
+.page-title { font-size: 30px; border-bottom: 3px solid #7fcc2a; padding-bottom: 5px; margin-bottom: 30px !important; color: #7fcc2a; font-family: URW Chancery L, cursive !important; margin-bottom: 5px; font-style: italic; }
 .full-width {
  width: 100%;
 }
-.registration-form .btn-primary { margin-top: 30px; background: #7fcc2a; border-color: #7fcc2a ;}
-.invalid-feedback {
-display: block;
-margin-top: -15px;
-}
+.registration-form .btn-primary, .home-button { margin-top: 30px; background: #7fcc2a; border-color: #7fcc2a; }
+.registration-form .btn-primary:hover, .registration-form .btn-primary:not(:disabled):not(.disabled):active:focus, .home-button:not(:disabled):not(.disabled):active:focus, .home-button:hover { background: #7fcc2a; border-color: #7fcc2a;box-shadow: none; }
+
+.invalid-feedback { display: block; margin-top: -15px; }
 .shoppee-slider {
   width: 100%;
   height: 550px;
