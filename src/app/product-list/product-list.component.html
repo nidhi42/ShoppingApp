@@ -16,6 +16,7 @@
     </div>
   </ng-template>
 </ngb-carousel>
+
 <ul class="app-menu" id="myDIV">
   <li id="0" class="activated">
     <a (click)="getProducts(0)">
@@ -47,47 +48,60 @@
   <div class="app-title">
     <h4>Shopee Products</h4>
   </div>
-  <ul class="row clearfix product-ul">
-    <li class="col-sm-3" *ngFor="let product of productlist">
-      <mat-card class="example-card product-card clearfix">
-        <mat-card-header class="product-title">
-          <mat-card-title>{{product.name}}</mat-card-title>
-          <button class="btn btn-blue add-to-cart-btn pull-right" aria-label="Show an example snack-bar" (click)="addToCartClick(product.id)">Add TO Cart</button>
-        </mat-card-header>
-        <img mat-card-image [src]="product.photoPath" class="product-image" alt="Photo of a Shiba Inu">
-        <mat-card-content class="shopee-card-content clearfix">
-          <div class="clearfix">
-            <p class="product-description w-80 pull-left">
-              {{product.description}}
-            </p>
-            <p class="price w-20 pull-right text-right">
-              &#x20b9; {{product.price}}
-            </p>
-          </div>
-          <div class="clearfix">
-            <div class="w-100">
-              <div class="quantity-box text-right">
-                <div class="clearfix">
-                  <p class="incremented-price w-50 pull-right">&#x20b9;{{product.totalPrice}}</p>
-                  <div class="product-quantity">
-                    <button class="btn qty-decrement" (click)="decrementCartQty(product.id,product.quantity)">
-                      <i class="material-icons">
-                        remove
-                      </i>
-                    </button>
-                    <input type="number" min=1 max=50 class="qty-ctrl-input pull-left" [(ngModel)]="product.quantity">
-                    <button class="btn qty-increment" (click)="incrementCartQty(product.id,product.quantity)">
-                      <i class="material-icons">
-                        add
-                      </i>
-                    </button>
+  <div class="form-group search-box">
+    <i class="material-icons search-icon">
+      search
+    </i>
+    <input type="search" #search style="width:300px;" [(ngModel)]="searchTerm" class="form-control" placeholder="search by name">
+  </div>
+  <ng-container *ngIf="( productlist | productFilter : searchTerm) as result">
+    <ul class="row clearfix product-ul">
+      <li class="col-sm-3" *ngFor="let product of result">
+        <mat-card class="example-card product-card clearfix">
+          <mat-card-header class="product-title">
+            <mat-card-title>{{product.name}}</mat-card-title>
+            <button class="btn btn-blue add-to-cart-btn pull-right" aria-label="Show an example snack-bar" (click)="addToCartClick(product.id)">Add TO Cart</button>
+          </mat-card-header>
+          <img mat-card-image [src]="product.photoPath" class="product-image" alt="Photo of a Shiba Inu">
+          <mat-card-content class="shopee-card-content clearfix">
+            <div class="clearfix">
+              <p class="product-description w-80 pull-left">
+                {{product.description}}
+              </p>
+              <p class="price w-20 pull-right text-right">
+                &#x20b9; {{product.price}}
+              </p>
+            </div>
+            <div class="clearfix">
+              <div class="w-100">
+                <div class="quantity-box text-right">
+                  <div class="clearfix">
+                    <p class="incremented-price w-50 pull-right">&#x20b9;{{product.totalPrice}}</p>
+                    <div class="product-quantity">
+                      <button class="btn qty-decrement" (click)="decrementCartQty(product.id,product.quantity)">
+                        <i class="material-icons">
+                          remove
+                        </i>
+                      </button>
+                      <input type="number" min=1 max=50 class="qty-ctrl-input pull-left" [(ngModel)]="product.quantity">
+                      <button class="btn qty-increment" (click)="incrementCartQty(product.id,product.quantity)">
+                        <i class="material-icons">
+                          add
+                        </i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </li>
-  </ul>
+          </mat-card-content>
+        </mat-card>
+
+      </li>
+    </ul>
+    <div *ngIf="result.length === 0" class="text-center">
+      <img src="../assets/images/no-results.png" class="no-products-img" />
+      <p class="no-products-text">No Products Found.</p>
+    </div>
+  </ng-container>
 </div>

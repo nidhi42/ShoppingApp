@@ -12,6 +12,7 @@ import { CommonService } from '../common.service';
 export class ProductListComponent implements OnInit {
   [x: string]: any;
   durationInSeconds = 5;
+  searchTerm: string = "";
   constructor(public snackBar: MatSnackBar, private interService: IntermediateService, private commonService: CommonService) { }
   categoryType = productCategory;
   cartListItems: Productlist[] = [];
@@ -23,9 +24,9 @@ export class ProductListComponent implements OnInit {
     *  Slider Images. 
     */
   images = [1, 2, 3].map((n) => `https://picsum.photos/id/${n}/900/500`);
-   /** 
-     *  Product List Data. 
-     */
+  /** 
+    *  Product List Data. 
+    */
   productlist: Productlist[] = [
     { id: 11, name: "U.S. Polo Assn. Womens Solid Polo T-Shirt", description: "Regular Fit", quantity: 1, price: 3000, category: this.categoryType.women, photoPath: "../assets/images/product1.jpg", totalPrice: 0 },
 
@@ -36,9 +37,9 @@ export class ProductListComponent implements OnInit {
     { id: 14, name: "Wildcraft Unisex 2 Compartment Zipper Closure Backpack", description: "good package,100% Cotton", quantity: 1, price: 500, category: this.categoryType.kids, photoPath: "../assets/images/product5.jpg", totalPrice: 0 },
 
   ];
-    /** 
-      *  Method to handle any additional initialization tasks. 
-      */
+  /** 
+    *  Method to handle any additional initialization tasks. 
+    */
   ngOnInit() {
     this.productlist.forEach(item => {
       item.totalPrice = item.price * item.quantity;
@@ -48,41 +49,41 @@ export class ProductListComponent implements OnInit {
 
     let data = localStorage.getItem("productdata");
     this.productlist = JSON.parse(data);
-  
-  }
-   /**
-     * add products in cart 
-     */ 
-  addToCartClick(id) {
-      let cartNewItems = localStorage.getItem("cartSource");
-      if (cartNewItems !== null) {
-        this.cartListItems = JSON.parse(cartNewItems);
-      }
-      let index = this.cartListItems.findIndex(x => x.id === id);
-      if (index >= 0) {
-        this.cartListItems.splice(index, 1);
-      }
-      this.itemData = this.productlist.find(x => x.id === id);
-      this.cartListItems.push(this.itemData);
-      this.snackBar.open(this.message,this.action, {
-          duration: 2000
-      });
-      this.totalCartItem = 0;
-      this.cartListItems.forEach(item => {
-        this.totalCartItem = this.totalCartItem + item.quantity;
-      });
-      this.interService.onNewCartList(this.totalCartItem);
-      //debugger
-      let userDetails = localStorage.getItem("logindata");
-      localStorage.clear();
-      this.commonService.onSetData("productdata", this.productlist);
-      this.commonService.onSetData("cartSource", this.cartListItems);
-      this.commonService.onSetData("logindata", userDetails);
 
   }
-   /**
-     * increment quantity by plus button using quantity box
-     */ 
+  /**
+    * add products in cart 
+    */
+  addToCartClick(id) {
+    let cartNewItems = localStorage.getItem("cartSource");
+    if (cartNewItems !== null) {
+      this.cartListItems = JSON.parse(cartNewItems);
+    }
+    let index = this.cartListItems.findIndex(x => x.id === id);
+    if (index >= 0) {
+      this.cartListItems.splice(index, 1);
+    }
+    this.itemData = this.productlist.find(x => x.id === id);
+    this.cartListItems.push(this.itemData);
+    this.snackBar.open(this.message, this.action, {
+      duration: 2000
+    });
+    this.totalCartItem = 0;
+    this.cartListItems.forEach(item => {
+      this.totalCartItem = this.totalCartItem + item.quantity;
+    });
+    this.interService.onNewCartList(this.totalCartItem);
+    //debugger
+    let userDetails = localStorage.getItem("logindata");
+    localStorage.clear();
+    this.commonService.onSetData("productdata", this.productlist);
+    this.commonService.onSetData("cartSource", this.cartListItems);
+    this.commonService.onSetData("logindata", userDetails);
+
+  }
+  /**
+    * increment quantity by plus button using quantity box
+    */
   incrementCartQty(id, _quantity) {
     let qty = this.productlist.find(x => x.id === id).quantity;
     let index = this.productlist.findIndex(x => x.id === id);
@@ -93,9 +94,9 @@ export class ProductListComponent implements OnInit {
     this.productlist.find(x => x.id === id).totalPrice = price * qty;
 
   }
-    /**
-      * decrement quantity by plus button using quantity box
-      */ 
+  /**
+    * decrement quantity by plus button using quantity box
+    */
   decrementCartQty(id, _quantity) {
     let qty = this.productlist.find(x => x.id === id).quantity;
     let index = this.productlist.findIndex(x => x.id === id);
@@ -106,11 +107,11 @@ export class ProductListComponent implements OnInit {
     this.productlist.find(x => x.id === id).totalPrice = price * qty;
   }
 
-    /**
-      * get products on click of categories
-      */ 
+  /**
+    * get products on click of categories
+    */
   getProducts(category) {
-   let data = localStorage.getItem("productdata");
+    let data = localStorage.getItem("productdata");
     this.productlist = JSON.parse(data);
     let productData = [];
     if (category === 0) {
@@ -122,23 +123,23 @@ export class ProductListComponent implements OnInit {
         }
       });
     }
-  
+
     if (productData.length != 0) {
       this.productlist = productData;
     }
-   /**
-     * add and remove activated class in categories
-     */ 
+    /**
+      * add and remove activated class in categories
+      */
     let listItems = document.querySelectorAll('.app-menu li');
-      for (let i = 0; i < listItems.length; i++) {
-        if  (listItems[i].id==category) {
-           //add activated class
-          listItems[i].classList.add('activated');
-        }
-        else{
-           //remove class
-           listItems[i].classList.remove('activated');
-        }
+    for (let i = 0; i < listItems.length; i++) {
+      if (listItems[i].id == category) {
+        //add activated class
+        listItems[i].classList.add('activated');
       }
+      else {
+        //remove class
+        listItems[i].classList.remove('activated');
+      }
+    }
   }
 }

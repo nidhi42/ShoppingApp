@@ -25,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {IntermediateService} from './product-list/intermediate.service';
 import { ThankyouComponent } from './thankyou/thankyou.component';
+import { ProductFilterPipe } from './product-list/product-list.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
     CartComponent,
     HeaderComponent,
     ThankyouComponent,
+    ProductFilterPipe
   ],
   imports: [
     BrowserModule,
