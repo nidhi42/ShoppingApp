@@ -27,6 +27,7 @@ export class CartComponent implements OnInit {
   noData = this.dataSource.connect().pipe(map(data => data.length === 0));
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   newUserDetails: any;
+  action: string;
   constructor(public snackBar: MatSnackBar, private router: Router, private interService: IntermediateService,
     private commonService: CommonService) {
     // console.trace();
@@ -88,14 +89,10 @@ export class CartComponent implements OnInit {
   /** 
     *  Remove selected products in table 
     */
-  removeSelectedRows() {
-
-    this.cartListDetails.forEach(item => {
-      let index: number = this.cartListDetails.findIndex(d => d === item);
-      console.log(this.cartListDetails.findIndex(d => d === item));
+  removeSelectedRows(id) {
+      let index: number = this.cartListDetails.findIndex(d => d.id === id);
       this.cartListDetails.splice(index, 1);
       this.dataSource = new MatTableDataSource<Productlist>(this.cartListDetails);
-      this.selection = new SelectionModel<Productlist>(true, []);
       let data = localStorage.getItem("productdata");
       let productlist = JSON.parse(data);
       let userdetails = localStorage.getItem("logindata");
@@ -103,15 +100,15 @@ export class CartComponent implements OnInit {
       this.commonService.onSetData("productdata", productlist);
       this.commonService.onSetData("logindata", userdetails);
       this.commonService.onSetData("cartSource", this.cartListDetails);
+      this.totalCartItem = 0;
+      this.cartListDetails.forEach(item => {
+        this.totalCartItem = this.totalCartItem + item.quantity;
+      });
 
+      this.interService.onNewCartList(this.totalCartItem);
+    this.snackBar.open(this.message, this.action, {
+      duration: 2000
     });
-    this.totalCartItem = 0;
-    this.cartListDetails.forEach(item => {
-      this.totalCartItem = this.totalCartItem + item.quantity;
-    });
-    
-    this.interService.onNewCartList(this.totalCartItem);
-    this.snackBar.open(this.message);
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */

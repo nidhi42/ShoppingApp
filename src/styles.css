@@ -29,7 +29,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .app-header { background: linear-gradient(135deg,#7fcc2a,#0273d4); color: #fff; position: fixed; left: 0; right: 0; z-index: 999; }
 .banner-container { background: url('./assets/images/banner.jpg'); height: 100vh; background-size: cover; display: flex; justify-content: center; align-items: center; position: relative; }
 .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1; }
-.registration-form { max-width: 600px; width: 100%; margin: 0 auto; z-index: 2; background: rgba(255, 255, 255, 0.8); padding: 30px 40px; height: calc(100vh - 377px); overflow-y: auto; }
+.registration-form { max-width: 600px; width: 100%; margin: 0 auto; z-index: 2; background: rgba(255, 255, 255, 0.8); padding: 30px 40px; height: calc(100vh - 360px); overflow-y: auto; }
 .page-title { font-size: 30px; border-bottom: 3px solid #7fcc2a; padding-bottom: 5px; margin-bottom: 30px !important; color: #7fcc2a; font-family: URW Chancery L, cursive !important; margin-bottom: 5px; font-style: italic; }
 .full-width { width: 100%; }
 .registration-form .btn-primary, .home-button { margin-top: 30px; background: #7fcc2a; border-color: #7fcc2a; }

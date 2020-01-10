@@ -52,7 +52,7 @@
     <i class="material-icons search-icon">
       search
     </i>
-    <input type="search" #search style="width:300px;" [(ngModel)]="searchTerm" class="form-control" placeholder="search by name">
+    <input type="search" #search style="width:300px;" [(ngModel)]="searchTerm" class="form-control" placeholder="Search Products">
   </div>
   <ng-container *ngIf="( productlist | productFilter : searchTerm) as result">
     <ul class="row clearfix product-ul">
